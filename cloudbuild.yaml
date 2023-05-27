@@ -11,10 +11,16 @@ steps:
 # [END cloudbuild_start_data_fusion_pipeline]
 
 # [START cloudbuild_start_composer_dag]
-  - name: 'gcr.io/cloud-builders/gcloud'
+  - name: 'gcr.io/cloud-builders/curl'
     entrypoint: 'bash'
-    args: 
+    args:
       - '-c'
       - |
-        gcloud composer environments run demo-composer --location europe-west6 --project=savvy-hull-383206 --execute -- "trigger_dag" "--" "--conf" "{\"dag_id\":\"dataproc_cluster_jobs_3\"}"
+        access_token="$(gcloud auth print-access-token)"
+        dag_name="dataproc_cluster_jobs_3"
+        url="https://composer.googleapis.com/v1/projects/savvy-hull-383206/locations/europe-west6/environments/demo-composer/dags/${dag_name}/dagRuns"
+        curl -X POST -H "Authorization: Bearer ${access_token}" \
+        -H "Content-Type: application/json" \
+        -d "{\"conf\": {\"dag_id\":\"${dag_name}\"}}" \
+        "${url}"
 # [END cloudbuild_start_composer_dag]
