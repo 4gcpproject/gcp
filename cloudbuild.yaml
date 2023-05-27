@@ -5,10 +5,10 @@ steps:
     args:
       - '-c'
       - |
-        gcloud datafusion pipelines start PIPELINE_NAME \
-          --project=PROJECT_ID \
-          --region=REGION \
-          --instance=DATA_FUSION_INSTANCE_NAME
+        gcloud datafusion pipelines start main_pipeline2 \
+          --project=savvy-hull-383206 \
+          --region=europe-west6 \
+          --instance=demo-instance
 # [END cloudbuild_start_data_fusion_pipeline]
 
 # [START cloudbuild_start_composer_dag]
@@ -17,8 +17,8 @@ steps:
     args: 
       - '-c'
       - |
-        gcloud composer environments run ENVIRONMENT_NAME \
-          --location=LOCATION \
-          --project=PROJECT_ID \
-          -- "trigger_dag" "--conf" "{\"dag_id\":\"DAG_ID\"}"
+        gcloud composer environments run demo-composer \
+          --location=savvy-hull-383206 \
+          --project=europe-west6 \
+          -- "trigger_dag" "--conf" "{\"dag_id\":\"dataproc_cluster_jobs_3\"}"
 # [END cloudbuild_start_composer_dag]
