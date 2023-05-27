@@ -1,14 +1,13 @@
 # [START cloudbuild_start_data_fusion_pipeline]
 steps:
-  - name: 'gcr.io/cloud-builders/gcloud'
+  - name: 'gcr.io/cloud-builders/curl'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        gcloud datafusion pipelines start main_pipeline2 \
-          --project=savvy-hull-383206 \
-          --region=europe-west6 \
-          --instance=demo-instance
+        access_token="$(gcloud auth print-access-token)"
+        url="https://datafusion.googleapis.com/v1/projects/savvy-hull-383206/locations/europe-west6/instances/demo-instance/pipelines/main_pipeline2:start"
+        curl -X POST -H "Authorization: Bearer $access_token" "$url"
 # [END cloudbuild_start_data_fusion_pipeline]
 
 # [START cloudbuild_start_composer_dag]
