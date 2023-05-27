@@ -16,5 +16,5 @@ steps:
     args: 
       - '-c'
       - |
-        gcloud composer environments run demo-composer --location europe-west6 --project=savvy-hull-383206 --execute --environment demo-composer --location europe-west6 -- "trigger_dag" "--" "--conf" "{\"dag_id"\:\"dataproc_cluster_jobs_3\"}"
+        gcloud composer environments run demo-composer --location europe-west6 --project=savvy-hull-383206 --execute -- "trigger_dag" "--" "--conf" "{\"dag_id\":\"dataproc_cluster_jobs_3\"}"
 # [END cloudbuild_start_composer_dag]
