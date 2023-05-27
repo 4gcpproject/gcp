@@ -1,0 +1,23 @@
+# [START cloudbuild_start_data_fusion_pipeline]
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud datafusion pipelines start main_pipeline2 \
+        --project=savvy-hull-383206 \
+        --location=europe-west6 \
+        --instance=demo-instance
+# [END cloudbuild_start_data_fusion_pipeline]
+
+# [START cloudbuild_start_composer_dag]
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args: 
+    - '-c'
+    - |
+      gcloud composer environments run demo-composer \
+        --project=savvy-hull-383206 \
+        --location=europe-west6 \
+        -- "trigger_dag" "--conf" "{\"dag_id\":\"dataproc_cluster_jobs_3\"}"
+# [END cloudbuild_start_composer_dag]
