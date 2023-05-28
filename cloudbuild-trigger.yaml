@@ -1,6 +1,6 @@
 trigger:
   event: push
-  branch: main
+  branch: master
   substitutions:
     _GCS_BUCKET_PATH: just_bucket4
     _GCS_FILE_PATH: gs://just_bucket4/py_scripts/gcs_to_bq.py
