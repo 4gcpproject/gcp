@@ -1,0 +1,12 @@
+steps:
+  - name: 'gcr.io/cloud-builders/git'
+    args:
+      - 'clone'
+      - '--depth=1'
+      - 'https://github.com/4gcpproject/gcp'
+      - 'path/to/clone'
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args:
+      - 'cp'
+      - 'https://github.com/4gcpproject/gcp/blob/main/gcs_to_bq.py'
+      - 'gs://just_bucket4/py_scripts/gcs_to_bq.py'
